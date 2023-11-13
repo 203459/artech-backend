@@ -1,0 +1,26 @@
+{
+  "name": "artech",
+  "version": "1.0.0",
+  "description": "Backend from Artech",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ts-node index.ts",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/203459/artech-backend.git"
+  },
+  "author": "Intec",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/203459/artech-backend/issues"
+  },
+  "homepage": "https://github.com/203459/artech-backend#readme",
+  "devDependencies": {
+    "@types/node": "^20.9.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  }
+}
