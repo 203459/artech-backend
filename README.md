@@ -34,4 +34,4 @@ Mantener actualizado tu repositorio con git pull y con git merge
 # Intrucciones para inicializar el programa
 
 # Correr la aplicacion 
-npm start
+npm run dev
