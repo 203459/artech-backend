@@ -19,7 +19,6 @@ export class UserCreateController {
                 password
             );
             
-           
            // console.log(user)
             if (createUser instanceof Error) {
                 return res.status(409).send({

@@ -30,7 +30,7 @@ User.init(
     password: {
       type: DataTypes.STRING,
       allowNull: false,
-      //validate:{is: strongPasswordRegex}
+      validate:{is: strongPasswordRegex}
     },
   },
   {

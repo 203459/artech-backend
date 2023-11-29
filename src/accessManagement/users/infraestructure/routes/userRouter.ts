@@ -1,6 +1,11 @@
 import express, { Router } from 'express';
-import { userCreateController} from '../dependencies';
+import { validateToken } from '../../../helpers/verifyToken';
+import { userCreateController,loginUserController, listAllUsersController} from '../dependencies';
 
 export const userRouter: Router = express.Router();
 
 userRouter.post('/', userCreateController.run.bind(userCreateController));
+
+userRouter.post('/login',loginUserController.run.bind(loginUserController))
+
+userRouter.get('/', validateToken ,listAllUsersController.run.bind(listAllUsersController))

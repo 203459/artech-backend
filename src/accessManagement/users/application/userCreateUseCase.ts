@@ -1,5 +1,6 @@
-import { User } from '../domain/entities/user'; // Asegúrate de importar la entidad User
+import { User } from '../domain/entities/user';
 import { UserRepository } from '../domain/repositories/userRepository';
+import { encrypt } from "../../helpers/hash";
 
 export class UserCreateUseCase {
 
@@ -10,12 +11,16 @@ export class UserCreateUseCase {
         password: string,
         
     ): Promise<User | null | number | Error> {
+
+        //aqui por que si va vacio se hashea antes evitando asi la validacion 
+        const hashPassword = await encrypt(password)
+
         try {
-            if (!email || !password) {
+            if (!email || !hashPassword) {
                 return null;
             }
 
-            const registerUser = await this.userRepository.createUser(email, password);
+            const registerUser = await this.userRepository.createUser(email, hashPassword);
 
             if (registerUser === null) {
                 return null;
