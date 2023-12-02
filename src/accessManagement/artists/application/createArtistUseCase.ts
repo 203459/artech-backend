@@ -2,7 +2,7 @@ import { Artist } from '../domain/entities/artist';
 import { ArtistRepository } from '../domain/repositories/artistRepository';
 //import { encrypt } from "../../helpers/hash";
 
-export class ArtistCreateUseCase {
+export class CreateArtistUseCase {
 
     constructor(readonly artistRepository: ArtistRepository) { }
 
@@ -18,14 +18,14 @@ export class ArtistCreateUseCase {
         
     ): Promise<Artist | string | number | null> {
 
-        //aqui por que si va vacio se hashea antes evitando asi la validacion
-
         try {
             if (!nickname || !name || !lastname || !phone || !art_type || !location || !id_user) {
                 return null;
             }
 
             const registerArtist = await this.artistRepository.createArtist(nickname, name, lastname, phone, art_type, location, id_user, status);
+            
+            console.log(registerArtist);
 
             if (registerArtist === null) {
                 return null;
@@ -33,6 +33,7 @@ export class ArtistCreateUseCase {
 
             return registerArtist;
         } catch (error) {
+            console.error("Error in CreateArtistUseCase:", error);
             return null;
         }
     }

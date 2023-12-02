@@ -1,14 +1,13 @@
 import { Artist } from "../../domain/entities/artist";
 import { ArtistRepository } from "../../domain/repositories/artistRepository";
+import { ArtistModel } from "../../infraestructure/models/artistModel"
 /* import { compare, encrypt } from '../../../helpers/hash';
 import { tokenSigIn } from "../../../helpers/token"; */
-
-
 
 export class ArtistRepositoryImpl implements ArtistRepository{
 
     createArtist(nickname:string, name:string, lastname:string, phone:string, art_type:string[], location:string, id_user:number, status:string): Promise<Artist | string | number | null> {
-        return Artist.create({
+        return ArtistModel.create({
             nickname,
             name,
             lastname,
@@ -21,20 +20,53 @@ export class ArtistRepositoryImpl implements ArtistRepository{
     }
     
     listAllArtists(): Promise<Artist[] | null> {
-        return Artist.findAll();
+        return ArtistModel.findAll();
     }
     
-    /*getArtistById(idArtist: number): Promise<Artist | null> {
-        throw new Error("Method not implemented.");
+    getArtistById(id: number): Promise<Artist | null> {
+        return ArtistModel.findOne({ where: { id } });
     }
-    updateArtist(idArtist: number, updatedArtist: Artist): Promise<Artist | null> {
-        throw new Error("Method not implemented.");
+
+    async updateArtist(id:number ,nickname: string, name: string, lastname: string, phone: string, art_type: string[]): Promise<Artist | string | null> {
+        return ArtistModel.update(
+            { nickname,name, lastname, phone, art_type },
+            { where: { id } }
+        )
+            .then(([updatedRows]) => {
+                if (updatedRows > 0) {
+                    
+                    return ArtistModel.findOne({ where: { id } });
+                } else {
+                    return null;
+                }
+            })
+            .catch((error) => {
+                
+                console.error('Error actualizando al artista:', error);
+                return 'Error actualizando al artista';
+            });
     }
-    deleteArtist(idArtist: number): Promise<boolean> {
-        throw new Error("Method not implemented.");
+
+    async validateArtist(id: number, status: string): Promise<Artist | boolean | null | Error> {
+        return ArtistModel.update(
+            { status },
+            { where: { id } }
+        )
+            .then(([updatedRows]) => {
+                if (updatedRows > 0) {
+                    return ArtistModel.findOne({ where: { id } });
+                } else {
+                    return null;
+                }
+            })
+            .catch((error) => {
+                console.error('Error actualizando al artista:', error);
+                return error;
+            });
     }
-    updatePassword(idArtist: number, newPassword: string): Promise<boolean> {
+
+    /* deleteArtist(idArtist: number): Promise<boolean> {
         throw new Error("Method not implemented.");
-    }*/
+    } */
 
 }

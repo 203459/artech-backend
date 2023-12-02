@@ -1,7 +1,6 @@
 import { Artist } from "../domain/entities/artist";
 import { ArtistRepository } from "../domain/repositories/artistRepository";
 
-
 export class ListAllArtistsUseCase {
     constructor(readonly artistRepository: ArtistRepository){}
 

@@ -1,27 +1,26 @@
 import { Request, Response } from 'express';
-import { ArtistCreateUseCase } from '../../application/artistCreateUseCase';
-import { Artist } from '../../domain/entities/artist';
+import { CreateArtistUseCase } from '../../application/createArtistUseCase';
 
-export class ArtistCreateController {
-    constructor(readonly ArtistCreateUseCase: ArtistCreateUseCase) { }
+export class CreateArtistController {
+    constructor(readonly CreateArtistUseCase: CreateArtistUseCase) { }
 
     async run(req: Request, res: Response) {
         console.log('controller');
+        const {
+            nickname,
+            name,
+            lastname,
+            phone,
+            art_type,
+            location,
+            id_user
+        } = req.body;
 
         try {
-            const {
-                nickname,
-                name,
-                lastname,
-                phone,
-                art_type,
-                location,
-                id_user
-            } = req.body;
             
             const status = 'en proceso';
 
-            const createArtist = await this.ArtistCreateUseCase.run(
+            const createArtist = await this.CreateArtistUseCase.run(
                 nickname,
                 name,
                 lastname,
@@ -34,29 +33,25 @@ export class ArtistCreateController {
             
             console.log(createArtist)
 
-            if (createArtist instanceof Error) {
+            /* if (createArtist instanceof Error) {
                 return res.status(409).send({
                     status: "error",
                     message: createArtist.message,
                 });
-            }
+            } */
 
-            console.log(createArtist)
-
-            if (createArtist instanceof Artist) {
+            if (createArtist) {
                 return res.status(201).send({
                     status: "success",
                     data: {
-                        nickname: createArtist.nickname,
-                        name : createArtist.name,
-                        lastname : createArtist.lastname,
-                        phone : createArtist.phone,
-                        status : createArtist.status,
+                        createArtist,
                     },
+                    message: "Artista creado correctamente"
                 });
             } else {
-                return res.status(500).send({
+                return res.status(400).send({
                     status: "error",
+                    data: [],
                     message: "Se registró un error inesperado mientras se registraban los datos del artista.",
                 });
             }
