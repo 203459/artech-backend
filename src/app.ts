@@ -1,28 +1,84 @@
-import sequelize from './database/db';
-import express from 'express';
+import Database from './database/db';
+import express, { Application, Request, Response } from "express";
 import { Signale } from 'signale';
 import dotenv from 'dotenv';
 import { userRouter } from './accessManagement/users/infraestructure/routes/userRouter';
 
-sequelize.authenticate()
-  .then(() => {
-    console.log('Conexión a la base de datos establecida con éxito.');
-  })
-  .catch((error) => {
-    console.error('Error al conectar a la base de datos:', error);
-  });
-  
 dotenv.config();
 
-const app = express();
-const signale = new Signale();
-app.use(express.json());
+class App {
+  public app: Application;
 
-app.use('/api/v1/user', userRouter);
+  constructor() {
+    this.app = express();
+    this.databaseSync();
+    this.plugins();
+    this.routes();
+  }
+
+  protected plugins(): void {
+    this.app.use(express.json());
+    this.app.use(express.urlencoded({ extended: true }));
+  }
+
+  protected databaseSync(): void {
+    const db = new Database();
+    db.sequelize?.sync();
+  }
+
+  protected routes(): void {
+    this.app.route("/").get((req: Request, res: Response) => {
+      res.send("welcome home");
+    });
+    this.app.use('/api/v1/user', userRouter);
+  }
+}
 
 const SERVER_PORT = process.env.SERVER_PORT || 3000;
 
-app.listen(SERVER_PORT, () => {
-    signale.success(`Server run in port ${SERVER_PORT}`);
+new App().app.listen(SERVER_PORT, () => {
+  console.log(`✅ Server run in port ${SERVER_PORT}`);
 });
 
+/* import Database from './database/db';
+import express, { Application, Request, Response } from "express";
+import dotenv from 'dotenv';
+import {artistRouter}  from './accessManagement/artists/infraestructure/routes/artistRouter';
+import {emailRouter } from './accessManagement/artists/infraestructure/services/emailRouter';
+
+dotenv.config();
+
+class App {
+  public app: Application;
+
+  constructor() {
+    this.app = express();
+    this.databaseSync();
+    this.plugins();
+    this.routes();
+  }
+
+  protected plugins(): void {
+    this.app.use(express.json());
+    this.app.use(express.urlencoded({ extended: true }));
+  }
+
+  protected databaseSync(): void {
+    const db = new Database();
+    db.sequelize?.sync();
+  }
+
+  protected routes(): void {
+    this.app.route("/").get((req: Request, res: Response) => {
+      res.send("welcome home");
+    });
+    this.app.use('/api/v1/artist', artistRouter);
+    this.app.use('/api/v1/artist/email', emailRouter);
+  }
+}
+
+const SERVER_PORT = process.env.SERVER_PORT || 3000;
+
+new App().app.listen(SERVER_PORT, () => {
+  console.log(`✅ Server run in port ${SERVER_PORT}`);
+}); */

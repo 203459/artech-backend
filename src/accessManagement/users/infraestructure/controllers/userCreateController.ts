@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import { UserCreateUseCase } from '../../application/userCreateUseCase';
-import { User } from '../../domain/entities/user';
 
 export class UserCreateController {
     constructor(readonly UserCreateUseCase: UserCreateUseCase) { }
@@ -27,12 +26,11 @@ export class UserCreateController {
                 });
             }
 
-            if (createUser instanceof User) {
+            if (createUser) {
                 return res.status(201).send({
                     status: "success",
                     data: {
-                        email: createUser.email,
-                        password : createUser.password
+                        createUser
                     },
                 });
             } else {

@@ -15,14 +15,14 @@ export class ListAllUsersController {
             return res.status(200).send({
               status: 'success',
               data: users,
-              message: 'Lista de personas obtenida exitosamente',
+              message: 'Lista de usuarios obtenida exitosamente',
               
             });
           }
           //console.log(users)
           return res.status(404).send({
             status: 'error',
-            message: 'No se encontraron personas',
+            message: 'No se encontraron usuarios',
           });
         } catch (error) {   
             console.error("Error fetching all users:", error);

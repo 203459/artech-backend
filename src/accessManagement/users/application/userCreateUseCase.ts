@@ -12,7 +12,6 @@ export class UserCreateUseCase {
         
     ): Promise<User | null | number | Error> {
 
-        //aqui por que si va vacio se hashea antes evitando asi la validacion 
         const hashPassword = await encrypt(password)
 
         try {
