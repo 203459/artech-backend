@@ -1,6 +1,6 @@
 import { Sequelize } from "sequelize-typescript";
 import * as dotenv from 'dotenv';
-import { ArtistModel } from '../accessManagement/artists/infraestructure/models/artistModel';
+import { ArtistModel } from '../artistsManagement/artists/infraestructure/models/artistModel';
 dotenv.config();
 
 
