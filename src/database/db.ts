@@ -1,6 +1,6 @@
 import { Sequelize } from "sequelize-typescript";
 import * as dotenv from 'dotenv';
-import { UserModel } from '../accessManagement/users/infraestructure/models/userModel';
+import { UserModel } from '../accessManagement/user/infraestructure/models/userModel';
 
 dotenv.config();
 

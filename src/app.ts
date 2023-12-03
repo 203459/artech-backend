@@ -2,7 +2,7 @@ import Database from './database/db';
 import express, { Application, Request, Response } from "express";
 import { Signale } from 'signale';
 import dotenv from 'dotenv';
-import { userRouter } from './accessManagement/users/infraestructure/routes/userRouter';
+import { userRouter } from './accessManagement/user/infraestructure/routes/userRouter';
 
 dotenv.config();
 
