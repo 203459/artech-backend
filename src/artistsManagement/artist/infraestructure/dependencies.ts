@@ -31,10 +31,18 @@ import { ValidateArtistUseCase } from "../application/validateArtistUseCase";
 const validateArtistUseCase = new ValidateArtistUseCase(artistRepositoryImpl);
 const validateArtistController = new ValidateArtistController(validateArtistUseCase);
 
+import { UpdateFollowController } from "./controllers/updateFollowController";
+import { UpdateFollowUseCase } from "../application/updateFollowUseCase";
+
+const updateFollowUseCase = new UpdateFollowUseCase(artistRepositoryImpl);
+const updateFollowController = new UpdateFollowController(updateFollowUseCase);
+
 export {
     createArtistController,
     listAllArtistsController,
     updateArtistController,
     validateArtistController,
     getArtistByIdController,
+    updateFollowController
+
 };

@@ -1,8 +1,7 @@
 import { Sequelize } from "sequelize-typescript";
 import * as dotenv from 'dotenv';
-import { ArtistModel } from '../artistsManagement/artists/infraestructure/models/artistModel';
+import { ArtistModel } from '../artistsManagement/artist/infraestructure/models/artistModel';
 dotenv.config();
-
 
 class Database {
   public sequelize: Sequelize | undefined;

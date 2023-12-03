@@ -1,6 +1,6 @@
 import express, { Router } from 'express';
 //import { validateToken } from '../../../helpers/verifyToken';
-import { createArtistController, listAllArtistsController, updateArtistController, validateArtistController, getArtistByIdController} from '../dependencies';
+import { createArtistController, listAllArtistsController, updateArtistController, validateArtistController, getArtistByIdController, updateFollowController} from '../dependencies';
 
 export const artistRouter: Router = express.Router();
 
@@ -13,3 +13,5 @@ artistRouter.get('/:id', getArtistByIdController.run.bind(getArtistByIdControlle
 artistRouter.put('/:id', updateArtistController.run.bind(updateArtistController));
 
 artistRouter.put('/validate/:id', validateArtistController.run.bind(validateArtistController));
+
+artistRouter.put('/follow/:id', updateFollowController.run.bind(updateFollowController));

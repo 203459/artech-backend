@@ -1,8 +1,8 @@
 import Database from './database/db';
 import express, { Application, Request, Response } from "express";
 import dotenv from 'dotenv';
-import {artistRouter}  from './artistsManagement/artists/infraestructure/routes/artistRouter';
-import {emailRouter } from './artistsManagement/artists/infraestructure/services/emailRouter';
+import {artistRouter}  from './artistsManagement/artist/infraestructure/routes/artistRouter';
+import {emailRouter } from './artistsManagement/artist/infraestructure/services/emailRouter';
 
 dotenv.config();
 
