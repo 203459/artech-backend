@@ -32,10 +32,17 @@ import { UpdatePasswordUseCase } from "../application/updatePasswordUseCase";
 const updatePasswordUseCase = new UpdatePasswordUseCase(userRepositoryImpl);
 const updatePasswordController = new UpdatePasswordController(updatePasswordUseCase);
 
+import { ValidateDeletUserController } from "./controllers/validateDeletUserController";
+import { ValidateDeletUserUseCase } from "../application/validateDeletUserUseCase";
+
+const validateDeletUserUseCase = new ValidateDeletUserUseCase(userRepositoryImpl);
+const validateDeletUserController = new ValidateDeletUserController(validateDeletUserUseCase);
+
 export {
     userCreateController,
     loginUserController,
     listAllUsersController,
     userDeleteController,
     updatePasswordController,
+    validateDeletUserController
 };

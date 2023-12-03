@@ -12,6 +12,7 @@ export class UserModel extends Model {
   public static USER_ID= "id" as string;
   public static USER_EMAIL= "email" as string
   public static USER_PASSWORD= "password" as string
+  public static USER_STATUS_DELET= "status_delet" as string
 
   @Column({
     type: DataType.INTEGER,
@@ -38,4 +39,12 @@ export class UserModel extends Model {
     field: UserModel.USER_PASSWORD,
   })
   public password!: string;
+
+  @Column({
+    type: DataType.STRING(128),
+    allowNull: false,
+    validate: { isIn: [['Activo', 'Inactivo']] },
+    field: UserModel.USER_STATUS_DELET,
+  })
+  public status_delet!: string;
 }

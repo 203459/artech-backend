@@ -12,10 +12,11 @@ export class UserCreateController {
                 email,
                 password,
             } = req.body;
-
+            const status_delet = 'Activo';
             const createUser = await this.UserCreateUseCase.run(
                 email,
-                password
+                password,
+                status_delet
             );
             
            // console.log(user)

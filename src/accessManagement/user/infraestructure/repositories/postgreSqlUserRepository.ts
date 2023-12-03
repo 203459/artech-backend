@@ -11,10 +11,11 @@ export class UserRepositoryImpl implements UserRepository{
         return UserModel.findAll();
     }
 
-    createUser(email: String, password: String): Promise<User | null> {
+    createUser(email: String, password: String, status_delet: String): Promise<User | null> {
         return UserModel.create({
          email,
-         password 
+         password,
+         status_delet
         });
     }
 
@@ -84,5 +85,22 @@ export class UserRepositoryImpl implements UserRepository{
             throw error;
         }
     }
-    
+
+    async validateDeletUser(id: number, status_delet: string): Promise<User | boolean | null | Error> {
+        return UserModel.update(
+            { status_delet },
+            { where: { id } }
+        )
+            .then(([updatedRows]) => {
+                if (updatedRows > 0) {
+                    return UserModel.findOne({ where: { id } });
+                } else {
+                    return null;
+                }
+            })
+            .catch((error) => {
+                console.error('Error actualizando al artista:', error);
+                return error;
+            });
+    }
 }
