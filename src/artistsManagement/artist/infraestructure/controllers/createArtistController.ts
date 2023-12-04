@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import { CreateArtistUseCase } from '../../application/createArtistUseCase';
-import { DataType } from 'sequelize-typescript';
 
 export class CreateArtistController {
     constructor(readonly CreateArtistUseCase: CreateArtistUseCase) { }
@@ -12,20 +11,19 @@ export class CreateArtistController {
             name,
             lastname,
             phone,
-            art_type,
-            location,
             id_user,
         } = req.body;
 
         try {
             
             const status = 'en proceso';
+            const location = '';
+            const art_type: string[] = [];
             const followers: string[] = [];
             const following: string[] = [];
             const total_followers = 0;
             const total_following = 0;
-
-            console.log('\n\nTipo de total_following:', typeof total_following);
+            
 
             const createArtist = await this.CreateArtistUseCase.run(
                 nickname,
@@ -54,9 +52,7 @@ export class CreateArtistController {
             if (createArtist) {
                 return res.status(201).send({
                     status: "success",
-                    data: {
-                        createArtist,
-                    },
+                    data: createArtist,
                     message: "Artista creado correctamente"
                 });
             } else {

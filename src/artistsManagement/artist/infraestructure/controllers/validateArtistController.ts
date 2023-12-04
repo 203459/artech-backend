@@ -30,7 +30,7 @@ export class ValidateArtistController {
                 return res.status(201).json({
                     status: "success",
                     message: "Estado modificado con éxito",
-                    updatedArtist,
+                    data: updatedArtist,
                 });
 
             } catch (error) {
@@ -53,7 +53,7 @@ export class ValidateArtistController {
                 }
             }
         } catch (error) {
-            console.error("Error update status:", error);
+            console.error("Error al modificar estado:", error);
             return res.status(500).json({
                 status: "error",
                 message: "Error al modificar el estado",

@@ -1,35 +1,36 @@
 import { Request, Response } from "express";
-import { UpdateFollowUseCase } from "../../application/updateFollowUseCase";
+import { UpdateLocationUseCase } from "../../application/updateLocationUseCase";
 import { ValidationError } from "sequelize";
 
-export class UpdateFollowController {
-    constructor(readonly updateFollowUseCase: UpdateFollowUseCase) { }
+export class UpdateLocationController {
+    constructor(readonly updateLocationUseCase: UpdateLocationUseCase) { }
 
     async run(req: Request, res: Response) {
         try {
             let {
                 id
-                
             } = req.params;
 
-            const nuevoFollow = req.body;
+            let {
+                location
+            } = req.body;
 
-            let updatedFollowing;
+            let updatedArtist;
             
             try {
                 // Intenta ejecutar la validación y la actualización en la base de datos
                 console.log(id);
 
-                const id_artist = parseInt(id);
+                const idartist = parseInt(id);
 
-                updatedFollowing = await this.updateFollowUseCase.run(id_artist, nuevoFollow);
+                updatedArtist = await this.updateLocationUseCase.run(idartist, location);
                 
                 console.log(id);
 
                 return res.status(201).json({
                     status: "success",
-                    message: "Estado modificado con éxito",
-                    updatedFollowing,
+                    message: "Ubicación actualizada con éxito",
+                    data: updatedArtist,
                 });
 
             } catch (error) {
@@ -44,7 +45,7 @@ export class UpdateFollowController {
 
                     return res.status(400).json({
                         status: "error",
-                        message: "Error de validación",
+                        message: "Error de actualización",
                         errors,
                     });
                 } else {
@@ -52,10 +53,10 @@ export class UpdateFollowController {
                 }
             }
         } catch (error) {
-            console.error("Error update status:", error);
+            console.error("Error al actualizar la ubicación:", error);
             return res.status(500).json({
                 status: "error",
-                message: "Error al modificar el estado",
+                message: "Error al actualizar la ubicación",
             });
         }
     }

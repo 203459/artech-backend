@@ -23,7 +23,7 @@ export class CreateArtistUseCase {
     ): Promise<Artist | string | number | null> {
 
         try {
-            if (!nickname || !name || !lastname || !phone || !art_type || !location || !id_user || !followers || !following) {
+            if (!nickname || !name || !lastname || !phone || !id_user) {
                 return null;
             }
 

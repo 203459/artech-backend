@@ -1,26 +1,27 @@
 import { Artist } from '../domain/entities/artist';
 import { ArtistRepository } from '../domain/repositories/artistRepository';
 
-export class UpdateFollowUseCase {
+export class UpdateFollowingUseCase {
 
     constructor(readonly ArtistRepository: ArtistRepository) { }
 
     async run(
         id: number,
-        followers: Artist []
+        following: string [],
+        total_following: number,
 
     ): Promise< Artist | boolean | null | number | string | Error> {
         try {
-            if (!id || !followers) {
+            if (!id || !following) {
                 return null;
             }
 
-            const updateFollow = await this.ArtistRepository.updateFollow(id, followers);
-            if (updateFollow === null) {
+            const updateArtist = await this.ArtistRepository.updateFollowing(id, following, total_following);
+            if (updateArtist === null) {
                 return null;
             }
 
-            return updateFollow;
+            return updateArtist;
         } catch (error) {
             return null;
         }

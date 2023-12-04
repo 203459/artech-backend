@@ -28,6 +28,11 @@ export interface ArtistRepository {
         art_type: string[]
     ): Promise<Artist | string | null>;
 
+    updateLocation(
+        id: number, 
+        location: string
+    ): Promise<Artist | boolean | null | Error>;
+
     validateArtist(
         id: number, 
         status: string
@@ -37,9 +42,24 @@ export interface ArtistRepository {
         id: number
     ): Promise<Artist | number | null>;
 
-    updateFollow(
+    updateFollowing(
         id: number, 
-        following: Artist [],
+        following: string [],
+        total_following: number,
+    ): Promise<Artist | boolean | null | string | number | Error>;
+
+    updateFollowers(
+        id: number, 
+        followers: string [],
+        total_followers: number,
+    ): Promise<Artist | boolean | null | string | number | Error>;
+
+    filterFollowersById(
+        id: number,
+    ): Promise<Artist | boolean | null | string | number | Error>;
+
+    filterFollowingById(
+        id: number,
     ): Promise<Artist | boolean | null | string | number | Error>;
 
     /* deleteArtist(

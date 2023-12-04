@@ -69,7 +69,7 @@ export class ArtistModel extends Model {
   
   @Column({
     type: DataType.STRING(128),
-    allowNull: false,
+    allowNull: true,
     field: ArtistModel.ARTIST_LOCATION,
   })
   public location!: string;
@@ -94,14 +94,14 @@ export class ArtistModel extends Model {
     allowNull: false,
     field: ArtistModel.ARTIST_FOLLOWERS,
   })
-  public followers!: string;
+  public followers!: string [];
 
   @Column({
     type: DataType.ARRAY(DataType.STRING(128)),
     allowNull: false,
     field: ArtistModel.ARTIST_FOLLOWING,
   })
-  public following!: string;
+  public following!: string [];
 
   @Column({
     type: DataType.INTEGER,
@@ -117,7 +117,6 @@ export class ArtistModel extends Model {
     field: ArtistModel.ARTIST_TOTALFOLLOWING,
   })
   public total_following!: number;
-
 }
 
 

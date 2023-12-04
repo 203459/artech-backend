@@ -1,17 +1,16 @@
 import { Request, Response } from "express";
-import { GetArtistByIdUseCase } from "../../application/getArtistByIdUseCase";
+import { FilterFollowersByIdUseCase } from "../../application/filterFollowersByIdUseCase";
 
-export class GetArtistByIdController {
-    constructor(
-        readonly getArtistByIdUseCase: GetArtistByIdUseCase,
-    ) { }
+export class FilterFollowersByIdController {
+
+    constructor(readonly filterFollowersByIdUseCase: FilterFollowersByIdUseCase) { }
 
     async run(req: Request, res: Response) {
         try {
 
             const { id } = req.params;
 
-            const artist = await this.getArtistByIdUseCase.run(parseInt(id));
+            const artist = await this.filterFollowersByIdUseCase.run(parseInt(id));
             
             console.log(artist)
 
@@ -19,7 +18,7 @@ export class GetArtistByIdController {
                 return res.status(200).send({
                     status: 'success',
                     data: artist,
-                    message: 'Artista obtenido exitosamente',
+                    message: 'Seguidores obtenidos exitosamente',
                 });
             }
             return res.status(404).send({
@@ -27,7 +26,7 @@ export class GetArtistByIdController {
                 message: 'No se encontró al artista',
             });
         } catch (error) {
-            console.error("Error al recuperar al artista:", error);
+            console.error("Error al recuperar los seguidores:", error);
             return res.status(500).send({
                 status: "error",
                 data: [],

@@ -23,7 +23,7 @@ export class ListAllArtistsController {
             message: 'No se encontraron artistas',
           });
         } catch (error) {   
-            console.error("Error fetching all Artist:", error);
+            console.error("Error recuperando Artistas:", error);
             return res.status(500).send({
                 status: "error",
                 data: [],
