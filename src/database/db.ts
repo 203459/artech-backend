@@ -1,6 +1,6 @@
 import { Sequelize } from "sequelize-typescript";
 import * as dotenv from 'dotenv';
-import { ArtistModel } from '../artistsManagement/artist/infraestructure/models/artistModel';
+import { ArtistModel } from '../artistsManagement/artist/infraestructure/models/notificationModel';
 dotenv.config();
 
 class Database {

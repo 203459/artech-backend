@@ -1,6 +1,6 @@
 import { Artist } from "../../domain/entities/artist";
 import { ArtistRepository } from "../../domain/repositories/artistRepository";
-import { ArtistModel } from "../../infraestructure/models/artistModel"
+import { ArtistModel } from "../models/notificationModel"
 /* import { compare, encrypt } from '../../../helpers/hash';
 import { tokenSigIn } from "../../../helpers/token"; */
 

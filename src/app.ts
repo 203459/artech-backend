@@ -2,7 +2,6 @@ import Database from './database/db';
 import express, { Application, Request, Response } from "express";
 import dotenv from 'dotenv';
 import {artistRouter}  from './artistsManagement/artist/infraestructure/routes/artistRouter';
-import {emailRouter } from './artistsManagement/artist/infraestructure/services/emailRouter';
 
 dotenv.config();
 
@@ -31,7 +30,6 @@ class App {
       res.send("welcome home");
     });
     this.app.use('/api/v1/artist', artistRouter);
-    this.app.use('/api/v1/artist/email', emailRouter);
   }
 }
 
