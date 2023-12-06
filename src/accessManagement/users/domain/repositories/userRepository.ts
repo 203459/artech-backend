@@ -5,7 +5,7 @@ export interface UserRepository {
 
     listAllUsers(): Promise<User[] | null>;
     
-    createUser(email: String, password: String, status_delet: string,): Promise<User|null>;
+    createUser(email: String, password: String, status_delete: string,type_rolee: number): Promise<User|null>;
 
     loginUser(email:string, password:string):Promise<User | string | null> 
     

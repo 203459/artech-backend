@@ -12,13 +12,13 @@ export class ValidateDeletUserController {
             } = req.params;
 
             let {
-                status_delet
+                status_delete
             } = req.body;
 
             let updatedArtist;
 
             try {
-                updatedArtist = await this.validateDeletUserUseCase.run(parseInt(id), status_delet);
+                updatedArtist = await this.validateDeletUserUseCase.run(parseInt(id), status_delete);
             } catch (error) {
                 if (error instanceof ValidationError) {
                     const errors = error.errors.map((validationError) => ({

@@ -1,6 +1,8 @@
 import { Sequelize } from "sequelize-typescript";
 import * as dotenv from 'dotenv';
-import { UserModel } from '../accessManagement/user/infraestructure/models/userModel';
+import { UserModel } from "../accessManagement/users/infraestructure/models/userModel";
+import { RoleModel } from "../accessManagement/role/infraestructure/models/roleModel";
+
 
 dotenv.config();
 
@@ -45,7 +47,7 @@ class Database {
       host: this.POSTGRES_HOST,
       port: this.POSTGRES_PORT,
       dialect: "postgres",
-      models: [UserModel],
+      models: [UserModel,RoleModel],
     });
 
     try {

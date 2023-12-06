@@ -3,19 +3,22 @@ import { UserRepository } from "../../domain/repositories/userRepository";
 import { compare, encrypt } from '../../../helpers/hash';
 import { tokenSigIn } from "../../../helpers/token";
 import { UserModel } from "../../infraestructure/models/userModel"
+import { RoleModel } from "../../../role/infraestructure/models/roleModel";
+import { Op } from "sequelize";
 
 
-export class UserRepositoryImpl implements UserRepository{
-    
+export class UserRepositoryImpl implements UserRepository {
+
     listAllUsers(): Promise<User[] | null> {
         return UserModel.findAll();
     }
 
-    createUser(email: String, password: String, status_delet: String): Promise<User | null> {
+    createUser(email: String, password: String, status_delete: String, type_role: number): Promise<User | null> {
         return UserModel.create({
-         email,
-         password,
-         status_delet
+            email,
+            password,
+            status_delete,
+            type_role
         });
     }
 
@@ -28,13 +31,13 @@ export class UserRepositoryImpl implements UserRepository{
             });
 
             if (!user) {
-                return null; 
+                return null;
             }
 
             const passwordMatches = await compare(password, user.password);
 
             if (!passwordMatches) {
-                return 'Unauthorized'; 
+                return 'Unauthorized';
             }
             const token: string = tokenSigIn(user.id, user.email);
             return token;
@@ -59,7 +62,7 @@ export class UserRepositoryImpl implements UserRepository{
         try {
 
             const hashPassword = await encrypt(password);
-    
+
             const [affectedRows] = await UserModel.update(
                 { password: hashPassword },
                 {
@@ -68,7 +71,7 @@ export class UserRepositoryImpl implements UserRepository{
                     }
                 }
             );
-    
+
             if (affectedRows === 0) {
                 return null;
             }
@@ -78,7 +81,7 @@ export class UserRepositoryImpl implements UserRepository{
                     id: id
                 }
             });
-    
+
             return updatedUser || null;
         } catch (error) {
             console.error('Error updating password:', error);
@@ -86,9 +89,9 @@ export class UserRepositoryImpl implements UserRepository{
         }
     }
 
-    async validateDeletUser(id: number, status_delet: string): Promise<User | boolean | null | Error> {
+    async validateDeletUser(id: number, status_delete: string): Promise<User | boolean | null | Error> {
         return UserModel.update(
-            { status_delet },
+            { status_delete },
             { where: { id } }
         )
             .then(([updatedRows]) => {
@@ -103,4 +106,39 @@ export class UserRepositoryImpl implements UserRepository{
                 return error;
             });
     }
+
+    async getUserRole(): Promise<User[] | null> {
+        const whereStatement = {
+            // Aquí debes colocar tu lógica de filtrado
+            // Por ejemplo, si quieres filtrar por un campo 'name' igual a 'John':
+            type_role: 'user'
+        };
+        const userInfo = await UserModel.findAndCountAll({
+            include: [
+                {
+                    model: RoleModel,
+                    attributes: ['id', 'type_role'],
+                    as: 'roles',
+                    where: {
+                        [Op.or]: [{ role: { [Op.like]: '%MANAGER%' } }],
+                        required: true
+                    }
+                },
+                {
+                    model: UserModel,
+                    attributes: ['id', 'type_role'],
+                    as: 'roles2',
+                    required: true
+                }
+            ],
+            where: whereStatement, // Aquí deberías tener tu condición whereStatement
+        });
+    
+        // Aquí deberías devolver o hacer algo con la información obtenida, por ejemplo:
+        return userInfo.rows;
+
+    }
+       
+
+
 }

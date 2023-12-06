@@ -1,8 +1,10 @@
 import { Request, Response } from 'express';
 import { UserCreateUseCase } from '../../application/userCreateUseCase';
+import { CreateRoleUseCase } from '../../../role/application/createRoleUseCase';
+import { RoleModel } from '../../../role/infraestructure/models/roleModel';
 
 export class UserCreateController {
-    constructor(readonly UserCreateUseCase: UserCreateUseCase) { }
+    constructor(readonly userCreateUseCase: UserCreateUseCase) { }
 
     async run(req: Request, res: Response) {
         console.log('controller');
@@ -12,18 +14,25 @@ export class UserCreateController {
                 email,
                 password,
             } = req.body;
-            const status_delet = 'Activo';
-            const createUser = await this.UserCreateUseCase.run(
+
+            const status_delete = 'Activo';
+
+            const roles:RoleModel[] = await RoleModel.findAll();
+
+            const type_role = roles[0].id
+
+            const createUser = await this.userCreateUseCase.run(
                 email,
                 password,
-                status_delet
+                status_delete,
+                type_role
             );
             
-           // console.log(user)
+            console.log(createUser)
             if (createUser instanceof Error) {
                 return res.status(409).send({
                     status: "error",
-                    message: createUser.message,
+                    message: createUser.message
                 });
             }
 

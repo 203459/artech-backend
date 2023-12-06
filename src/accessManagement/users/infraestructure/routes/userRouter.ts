@@ -14,4 +14,4 @@ userRouter.delete('/:id',validateToken, userDeleteController.deleteUser.bind(use
 
 userRouter.put('/password/:id',validateToken, updatePasswordController.run.bind(updatePasswordController));
 
-userRouter.put('/validate_delet/:id', validateDeletUserController.run.bind(validateDeletUserController));
+userRouter.put('/status/:id', validateDeletUserController.run.bind(validateDeletUserController));

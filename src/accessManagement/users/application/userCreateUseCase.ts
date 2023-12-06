@@ -9,17 +9,18 @@ export class UserCreateUseCase {
     async run(
         email: string,
         password: string,
-        status_delet: string,
+        status_delete: string,
+        type_role: number
     ): Promise<User | null | number | Error> {
 
         const hashPassword = await encrypt(password)
 
         try {
-            if (!email || !hashPassword || !status_delet) {
+            if (!email || !hashPassword || !status_delete) {
                 return null;
             }
 
-            const registerUser = await this.userRepository.createUser(email, hashPassword,status_delet);
+            const registerUser = await this.userRepository.createUser(email, hashPassword,status_delete, type_role);
 
             if (registerUser === null) {
                 return null;

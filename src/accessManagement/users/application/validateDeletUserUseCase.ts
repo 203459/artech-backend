@@ -7,15 +7,15 @@ export class ValidateDeletUserUseCase {
 
     async run(
         id: number,
-        status_delet: string
+        status_delete: string
 
     ): Promise< User |boolean | null | Error> {
         try {
-            if (!id || !status_delet) {
+            if (!id || !status_delete) {
                 return null;
             }
 
-            const validateUser = await this.UserRepository.validateDeletUser(id, status_delet);
+            const validateUser = await this.UserRepository.validateDeletUser(id, status_delete);
             if (validateUser === null) {
                 return null;
             }

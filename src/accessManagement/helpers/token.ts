@@ -20,7 +20,7 @@ export const tokenSigIn = (id:number, email:string ): string => {
         },
         process.env.SECRET_JWT!,
         {
-            expiresIn: '5m'
+            expiresIn: '1h'
         }
     );
 }
