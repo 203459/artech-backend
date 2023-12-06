@@ -1,6 +1,7 @@
 import Database from './database/db';
 import express, { Application, Request, Response } from "express";
 import dotenv from 'dotenv';
+import { chatRouter } from './chatsManagement/chats/infraestructure/routes/chatRouter';
 
 
 dotenv.config();
@@ -29,7 +30,7 @@ class App {
     this.app.route("/").get((req: Request, res: Response) => {
       res.send("welcome home");
     });
-    this.app.use('/api/v1/user', chatRouter);
+    this.app.use('/api/v1/artist/chat', chatRouter);
   }
 }
 
