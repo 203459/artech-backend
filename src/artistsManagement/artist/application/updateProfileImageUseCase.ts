@@ -1,21 +1,21 @@
 import { Artist } from '../domain/entities/artist';
 import { ArtistRepository } from '../domain/repositories/artistRepository';
 
-export class UpdateLocationUseCase {
+export class UpdateProfileImageUseCase {
 
     constructor(readonly ArtistRepository: ArtistRepository) { }
 
     async run(
         id: number,
-        location: string
+        profile_image: string,
 
-    ): Promise< Artist |boolean | string| null | Error> {
+    ): Promise< Artist |boolean | string | null | Error> {
         try {
             if (!id) {
                 return null;
             }
 
-            const validateArtist = await this.ArtistRepository.updateLocation(id, location);
+            const validateArtist = await this.ArtistRepository.updateProfileImage(id, profile_image);
             if (validateArtist === null) {
                 return null;
             }

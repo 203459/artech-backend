@@ -8,6 +8,7 @@ import {
     getArtistByIdController, 
     updateFollowingController,
     updateLocationController,
+    updateProfileImageController,
     filterFollowersByIdController,
     filterFollowingByIdController,
 
@@ -24,6 +25,8 @@ artistRouter.get('/:id', getArtistByIdController.run.bind(getArtistByIdControlle
 artistRouter.put('/:id', updateArtistController.run.bind(updateArtistController));
 
 artistRouter.put('/location/:id', updateLocationController.run.bind(updateLocationController));
+
+artistRouter.put('/profile_image/:id', updateProfileImageController.run.bind(updateProfileImageController));
 
 artistRouter.put('/validate/:id', validateArtistController.run.bind(validateArtistController));
 

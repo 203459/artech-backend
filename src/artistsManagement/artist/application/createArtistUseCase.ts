@@ -11,6 +11,7 @@ export class CreateArtistUseCase {
         name: string,
         lastname: string,
         phone: string,
+        profile_image: string,
         art_type: string[],
         location: string,
         status: string,
@@ -27,7 +28,7 @@ export class CreateArtistUseCase {
                 return null;
             }
 
-            const registerArtist = await this.artistRepository.createArtist(nickname, name, lastname, phone, art_type, location, id_user, status, followers, following, total_followers, total_following);
+            const registerArtist = await this.artistRepository.createArtist(nickname, name, lastname, phone, profile_image, art_type, location, id_user, status, followers, following, total_followers, total_following);
             
             console.log(registerArtist);
 

@@ -3,18 +3,19 @@ import { Artist } from "../entities/artist";
 export interface ArtistRepository {
 
     createArtist(
-        nickname: string, 
-        name: string, 
-        lastname: string, 
-        phone: string, 
-        art_type: string[], 
-        location: string, 
-        id_user: number, 
+        nickname: string,
+        name: string,
+        lastname: string,
+        phone: string,
+        profile_image: string,
+        art_type: string[],
+        location: string,
+        id_user: number,
         status: string,
-        followers: string[], 
+        followers: string[],
         following: string[],
-        total_followers: number, 
-        total_following: number, 
+        total_followers: number,
+        total_following: number,
     ): Promise<Artist | string | number | null>;
 
     listAllArtists(): Promise<Artist[] | null>;
@@ -32,6 +33,11 @@ export interface ArtistRepository {
         id: number, 
         location: string
     ): Promise<Artist | boolean | null | Error>;
+
+    updateProfileImage(
+        id: number, 
+        profile_image: string
+    ): Promise<Artist | boolean | string| null | Error>;
 
     validateArtist(
         id: number, 

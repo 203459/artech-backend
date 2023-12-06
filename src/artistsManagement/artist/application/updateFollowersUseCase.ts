@@ -17,6 +17,7 @@ export class UpdateFollowersUseCase {
             }
 
             const updateArtist = await this.ArtistRepository.updateFollowers(id, followers, total_followers);
+            
             if (updateArtist === null) {
                 return null;
             }

@@ -25,6 +25,12 @@ import { UpdateArtistUseCase } from "../application/updateArtistUseCase";
 const updateArtistUseCase = new UpdateArtistUseCase(artistRepositoryImpl);
 const updateArtistController = new UpdateArtistController(updateArtistUseCase);
 
+import { UpdateProfileImageController } from "./controllers/updateProfileImageController";
+import { UpdateProfileImageUseCase } from "../application/updateProfileImageUseCase";
+
+const updateProfileImageUseCase = new UpdateProfileImageUseCase(artistRepositoryImpl);
+const updateProfileImageController = new UpdateProfileImageController(updateProfileImageUseCase);
+
 import { UpdateLocationController } from "./controllers/updateLocationController";
 import { UpdateLocationUseCase } from "../application/updateLocationUseCase";
 
@@ -37,12 +43,11 @@ import { ValidateArtistUseCase } from "../application/validateArtistUseCase";
 const validateArtistUseCase = new ValidateArtistUseCase(artistRepositoryImpl);
 const validateArtistController = new ValidateArtistController(validateArtistUseCase);
 
+import { UpdateFollowersUseCase } from "../application/updateFollowersUseCase";
+const updateFollowersUseCase = new UpdateFollowersUseCase(artistRepositoryImpl);
+
 import { UpdateFollowingController } from "./controllers/updateFollowingController";
 import { UpdateFollowingUseCase } from "../application/updateFollowingUseCase";
-
-import { UpdateFollowersUseCase } from "../application/updateFollowersUseCase";
-
-const updateFollowersUseCase = new UpdateFollowersUseCase(artistRepositoryImpl);
 
 const updateFollowingUseCase = new UpdateFollowingUseCase(artistRepositoryImpl);
 const updateFollowingController = new UpdateFollowingController(updateFollowingUseCase, updateFollowersUseCase);
@@ -64,6 +69,7 @@ export {
     getArtistByIdController,
     listAllArtistsController,
     updateArtistController,
+    updateProfileImageController,
     updateLocationController,
     validateArtistController,
     updateFollowingController,

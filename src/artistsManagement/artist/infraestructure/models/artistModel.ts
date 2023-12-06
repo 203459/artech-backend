@@ -13,6 +13,7 @@ export class ArtistModel extends Model {
   public static ARTIST_NAME= "name" as string;
   public static ARTIST_LASTNAME= "lastname" as string;
   public static ARTIST_PHONE= "phone" as string;
+  public static ARTIST_PROFILEIMAGE= "profile_image" as string;
   public static ARTIST_ARTTYPE= "art_type" as string;
   public static ARTIST_LOCATION= "location" as string;
   public static ARTIST_STATUS= "status" as string;
@@ -59,6 +60,13 @@ export class ArtistModel extends Model {
     field: ArtistModel.ARTIST_PHONE,
   })
   public phone!: string;
+
+  @Column({
+    type: DataType.STRING(128),
+    allowNull: true,
+    field: ArtistModel.ARTIST_PROFILEIMAGE,
+  })
+  public profile_image!: string;
  
   @Column({
     type: DataType.ARRAY(DataType.STRING(128)),

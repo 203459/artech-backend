@@ -5,14 +5,14 @@ import { ArtistModel } from "../../infraestructure/models/artistModel"
 import { tokenSigIn } from "../../../helpers/token"; */
 
 export class ArtistRepositoryImpl implements ArtistRepository {
-    static getArtistById: any;
 
-    createArtist(nickname: string, name: string, lastname: string, phone: string, art_type: string[], location: string, id_user: number, status: string, followers: string[], following: string[], total_followers: number, total_following: number): Promise<Artist | string | number | null> {
+    createArtist(nickname: string, name: string, lastname: string, phone: string, profile_image: string, art_type: string[], location: string, id_user: number, status: string, followers: string[], following: string[], total_followers: number, total_following: number): Promise<Artist | string | number | null> {
         return ArtistModel.create({
             nickname,
             name,
             lastname,
             phone,
+            profile_image,
             art_type,
             location,
             status,
@@ -48,13 +48,31 @@ export class ArtistRepositoryImpl implements ArtistRepository {
             .catch((error) => {
 
                 console.error('Error actualizando al artista:', error);
-                return 'Error actualizando al artista';
+                return error;
             });
     }
 
-    async updateLocation(id: number, location: string): Promise<Artist | boolean | null | Error> {
+    async updateLocation(id: number, location: string): Promise<Artist | boolean | null | string | Error> {
         return ArtistModel.update(
             { location },
+            { where: { id } }
+        )
+            .then(([updatedRows]) => {
+                if (updatedRows > 0) {
+                    return ArtistModel.findOne({ where: { id } });
+                } else {
+                    return null;
+                }
+            })
+            .catch((error) => {
+                console.error('Error actualizando al artista:', error);
+                return error;
+            });
+    }
+    
+    async updateProfileImage(id: number, profile_image: string): Promise<Artist | boolean | string | null | Error> {
+        return ArtistModel.update(
+            { profile_image },
             { where: { id } }
         )
             .then(([updatedRows]) => {
@@ -137,9 +155,4 @@ export class ArtistRepositoryImpl implements ArtistRepository {
             where: { id },
         });
     }
-
-    /* deleteArtist(idArtist: number): Promise<boolean> {
-        throw new Error("Method not implemented.");
-    } */
-
 }

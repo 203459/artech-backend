@@ -5,6 +5,7 @@ export class Artist {
     name: string,
     lastname: string,
     phone: string,
+    image_profile: string,
     art_type: string[],
     location: string,
     status: string,

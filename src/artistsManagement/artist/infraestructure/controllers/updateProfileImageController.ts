@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
-import { ValidateArtistUseCase } from "../../application/validateArtistUseCase";
+import { UpdateProfileImageUseCase } from "../../application/updateProfileImageUseCase";
 import { ValidationError } from "sequelize";
 
-export class ValidateArtistController {
-    constructor(readonly validateArtistUseCase: ValidateArtistUseCase) { }
+export class UpdateProfileImageController {
+    constructor(readonly updateProfileImageUseCase: UpdateProfileImageUseCase) { }
 
     async run(req: Request, res: Response) {
         try {
@@ -12,7 +12,7 @@ export class ValidateArtistController {
             } = req.params;
 
             let {
-                status
+                profile_image
             } = req.body;
 
             let updatedArtist;
@@ -22,18 +22,17 @@ export class ValidateArtistController {
 
                 const idartist = parseInt(id);
 
-                updatedArtist = await this.validateArtistUseCase.run(idartist, status);
+                updatedArtist = await this.updateProfileImageUseCase.run(idartist, profile_image);
                 
                 console.log(id);
 
                 return res.status(201).json({
                     status: "success",
-                    message: "Estado modificado con éxito",
+                    message: "Foto de perfil actualizada con éxito",
                     data: updatedArtist,
                 });
 
             } catch (error) {
-                // Manejar el error de validación de Sequelize
                 if (error instanceof ValidationError) {
                     const errors = error.errors.map((error) => ({
                         message: error.message,
@@ -44,7 +43,7 @@ export class ValidateArtistController {
 
                     return res.status(400).json({
                         status: "error",
-                        message: "Error de validación",
+                        message: "Error de actualización",
                         errors,
                     });
                 } else {
@@ -52,10 +51,10 @@ export class ValidateArtistController {
                 }
             }
         } catch (error) {
-            console.error("Error al modificar estado:", error);
+            console.error("Error al actualizar la foto de perfil:", error);
             return res.status(500).json({
                 status: "error",
-                message: "Error al modificar el estado",
+                message: "Error al actualizar foto de perfil",
             });
         }
     }

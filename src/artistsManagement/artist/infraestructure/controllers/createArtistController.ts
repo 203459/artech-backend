@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { CreateArtistUseCase } from '../../application/createArtistUseCase';
 
 export class CreateArtistController {
-    constructor(readonly CreateArtistUseCase: CreateArtistUseCase) { }
+    constructor(readonly createArtistUseCase: CreateArtistUseCase) { }
 
     async run(req: Request, res: Response) {
         console.log('controller');
@@ -17,6 +17,7 @@ export class CreateArtistController {
         try {
             
             const status = 'en proceso';
+            const profile_image = '';
             const location = '';
             const art_type: string[] = [];
             const followers: string[] = [];
@@ -24,12 +25,12 @@ export class CreateArtistController {
             const total_followers = 0;
             const total_following = 0;
             
-
-            const createArtist = await this.CreateArtistUseCase.run(
+            const createArtist = await this.createArtistUseCase.run(
                 nickname,
                 name,
                 lastname,
                 phone,
+                profile_image,
                 art_type,
                 location,
                 status,
