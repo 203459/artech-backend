@@ -1,42 +1,18 @@
-import { ChatRepositoryImpl } from "./repositories/postgreSqlChatRepository";
-const chatRepositoryImpl= new ChatRepositoryImpl();
+import { MessageRepositoryImpl } from "./repositories/postgreSqlMessageRepository";
+const messageRepositoryImpl= new MessageRepositoryImpl();
 
-/* import { LoginUserController } from "./controllers/loginUserController";
-import { LoginUserUseCase } from "../application/loginUserUseCase";
+import { MessageCreateController } from "./controllers/messageCreateController";
+import { MessageCreateUseCase } from "../application/messageCreateUseCase";
 
-const loginUserUseCase = new LoginUserUseCase(chatRepositoryImpl)
-const loginUserController = new LoginUserController(loginUserUseCase)
+const messageCreateUseCase = new  MessageCreateUseCase(messageRepositoryImpl);
+const messageCreateController = new MessageCreateController(messageCreateUseCase);
 
-import { ChatCreateController } from "./controllers/chatCreateController";
-import {  ChatCreateUseCase } from "../application/chatCreateUseCase";
+import { ListAllMessagesController} from "./controllers/listAllMessagesController";
+import { ListAllMessagesUseCase} from "../application/listAllMessagesUseCase";
 
-const chatCreateUseCase = new  ChatCreateUseCase(chatRepositoryImpl);
-const chatCreateController = new ChatCreateController(chatCreateUseCase);*/
-
-import { ListAllChatsController} from "./controllers/listAllChatsController";
-import { ListAllChatsUseCase} from "../application/listAllChatsUseCase";
-
-const listAllChatsUseCase = new ListAllChatsUseCase(chatRepositoryImpl)
-const listAllChatsController = new ListAllChatsController(listAllChatsUseCase)
-
-/*import { UserDeleteUseCase } from '../application/userDeleteUseCase';
-import { UserDeleteController } from './controllers/userDeleteController';
-
-const userDeleteUseCase = new UserDeleteUseCase(chatRepositoryImpl);
-const userDeleteController = new UserDeleteController(userDeleteUseCase);
-
-import { UpdatePasswordController } from "./controllers/updatePasswordController";
-import { UpdatePasswordUseCase } from "../application/updatePasswordUseCase";
-
-const updatePasswordUseCase = new UpdatePasswordUseCase(chatRepositoryImpl);
-const updatePasswordController = new UpdatePasswordController(updatePasswordUseCase);
-
-import { ValidateDeletUserController } from "./controllers/validateDeletUserController";
-import { ValidateDeletUserUseCase } from "../application/validateDeletUserUseCase";
-
-const validateDeletUserUseCase = new ValidateDeletUserUseCase(chatRepositoryImpl);
-const validateDeletUserController = new ValidateDeletUserController(validateDeletUserUseCase);*/
-
+const listAllMessagesUseCase = new ListAllMessagesUseCase(messageRepositoryImpl)
+const listAllMessagesController = new ListAllMessagesController(listAllMessagesUseCase)
 export {
-    listAllChatsController,
+    messageCreateController,
+    listAllMessagesController,
 };

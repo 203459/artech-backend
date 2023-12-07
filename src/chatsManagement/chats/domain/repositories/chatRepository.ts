@@ -3,9 +3,7 @@ import { Chat } from "../entities/chat";
 export interface ChatRepository {
 
     listAllChats(): Promise<Chat[] | null>;
-
-
-    /*createUser(email: String, password: String, status_delete: string,type_rolee: number): Promise<User|null>;    
-    updateUserPassword(id: number, password: string): Promise<Chat | null | string>*/
-
+    getChatById(id: number): Promise<Chat | number | null>;
+    createChat(status: String, id_artist: number): Promise<Chat|null>;
+    /*updateUserPassword(id: number, password: string): Promise<Chat | null | string>*/
 }

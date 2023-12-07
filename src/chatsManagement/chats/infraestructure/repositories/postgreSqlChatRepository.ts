@@ -10,5 +10,17 @@ export class ChatRepositoryImpl implements ChatRepository {
     listAllChats(): Promise<Chat[] | null> {
         return ChatModel.findAll();
     }
+
+    getChatById(id: number): Promise<Chat | null> {
+        return ChatModel.findOne({ where: { id } });
+    }
+
+    createChat(status: String, id_artist: number): Promise<Chat | null> {
+        return ChatModel.create({
+            status,
+            id_artist,
+           // createdAt
+        });
+    }
        
 }

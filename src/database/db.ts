@@ -1,6 +1,7 @@
 import { Sequelize } from "sequelize-typescript";
 import * as dotenv from 'dotenv';
 import { ChatModel } from '../chatsManagement/chats/infraestructure/models/chatModel';
+import { MessageModel } from "../chatsManagement/messages/infraestructure/models/messageModel";
 
 dotenv.config();
 
@@ -45,7 +46,7 @@ class Database {
       host: this.POSTGRES_HOST,
       port: this.POSTGRES_PORT,
       dialect: "postgres",
-      models: [ChatModel],
+      models: [ChatModel, MessageModel],
     });
 
     try {

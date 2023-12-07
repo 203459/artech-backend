@@ -2,7 +2,7 @@ import Database from './database/db';
 import express, { Application, Request, Response } from "express";
 import dotenv from 'dotenv';
 import { chatRouter } from './chatsManagement/chats/infraestructure/routes/chatRouter';
-
+import { messageRouter } from './chatsManagement/messages/infraestructure/routes/messageRouter';
 
 dotenv.config();
 
@@ -31,6 +31,7 @@ class App {
       res.send("welcome home");
     });
     this.app.use('/api/v1/artist/chat', chatRouter);
+    this.app.use('/api/v1/artist/message', messageRouter);
   }
 }
 

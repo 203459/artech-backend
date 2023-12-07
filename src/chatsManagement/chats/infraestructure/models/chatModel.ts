@@ -37,4 +37,13 @@ export class ChatModel extends Model {
     field: ChatModel.ID_ARTIST,
   })
   public id_artist!: number;
+
+  @Column({
+    type: DataType.DATE,
+    allowNull: false,
+    defaultValue: DataType.NOW,
+    field: 'createdAt',
+  })
+  public createdAt!: Date;
+
 }
