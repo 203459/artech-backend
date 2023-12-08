@@ -1,5 +1,4 @@
 import { Model, DataType, Table, Column } from 'sequelize-typescript';
-const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}[\]|\\:;<>,.?/~]).{8,}$/;
 
 @Table({
   tableName: RoleModel.ROLE_TABLE_NAME,

@@ -36,7 +36,7 @@ export class UserModel extends Model {
   @Column({
     type: DataType.STRING(128),
     allowNull: false,
-    validate:{is: strongPasswordRegex},
+    validate:{password: strongPasswordRegex},
     field: UserModel.USER_PASSWORD,
   })
   public password!: string;
