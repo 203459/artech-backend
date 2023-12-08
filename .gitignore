@@ -12,9 +12,6 @@ dist/
 npm-debug.log
 yarn-error.log
 
-# Archivos de entorno
-.env
-
 # Archivos de persistencia
 .data
 
